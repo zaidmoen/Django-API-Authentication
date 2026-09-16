@@ -16,6 +16,8 @@ This project is a clean Django REST API foundation for applications that need us
 - JWT authentication with access and refresh tokens
 - Secure user registration with Django password hashing
 - Authenticated `Task` CRUD API
+- Task priorities, categories and due dates
+- Task filtering, search and pagination
 - Object-level ownership permissions
 - Custom request logging middleware
 - Unique `X-Request-ID` header and execution-time tracking
@@ -98,6 +100,16 @@ The API is available at `http://127.0.0.1:8000/`.
 | `GET` / `POST` | `/api/tasks/` | Yes | List or create tasks |
 | `GET` / `PATCH` / `DELETE` | `/api/tasks/{id}/` | Yes | Manage one own task |
 | `GET` | `/api/tasks/completed/` | Yes | List completed tasks |
+
+Task list filters can be combined:
+
+```text
+GET /api/tasks/?status=todo&priority=high&category=study&search=exam&page=1&page_size=10
+```
+
+Available task fields are `title`, `description`, `status`, `priority`, `category`,
+and `due_date`. Priority values are `low`, `medium`, and `high`. The list endpoint
+returns paginated results with `count`, `next`, `previous`, and `results` fields.
 
 ### Authentication
 
